@@ -1,0 +1,19 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Vainglory07
+    jdia14@yahoo.com
+    Manila, Philippines
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    Twitter Bootstrap
+    Materialize Bootstrap
+    jQuery, Gulp
+    Laravel 5.2
+
+    Guzzle
+    Google Matrix API

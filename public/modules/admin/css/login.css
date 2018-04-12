@@ -1,0 +1,110 @@
+body {
+	margin: 0;
+	padding: 20px;
+
+	background: url("../images/binding_dark.png") repeat; 
+	background-color: #000;
+
+	font-family: 'Lato', tahoma, arial;
+	color: #404040;
+}
+
+.login-border {
+	width: 400px;
+	min-width: 400px;
+	max-width: 100%;
+	height: 435px;
+    max-height:100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	padding: 0;
+	border-radius: 3px;
+
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.login-form {
+	margin: 6px;
+	border-radius: 3px;
+	background: #fff;
+}
+
+.login-logo {
+	margin: 0 auto;
+	width: 250px;
+}
+
+.login-header {
+	padding: 20px 30px 10px 30px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	background: #e96656;
+	color: #fff;
+	text-align: center;
+}
+
+.login-header p {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.login-header span {
+	color: #e0e0e0;
+	font-size: 15px;
+	text-transform: uppercase;
+}
+
+.login-body {
+	padding: 10px 40px 40px 40px;
+}
+
+.login-footer {
+	margin-top: 50px;
+	margin-bottom: -30px;
+	text-align: center;
+}
+
+/* Fixes */
+.login-status {
+	width: 100%;
+	text-align: center;
+}
+
+.input-group-addon {
+	padding-top: 18px;
+	padding-left: 0;
+}
+
+.form-group.label-static label.control-label, 
+.form-group.label-floating.is-focused label.control-label, 
+.form-group.label-floating:not(.is-empty) label.control-label {
+    left: 35px;
+}
+
+.alert-login {
+	height: 40px;
+	padding: 10px;
+	margin-bottom: 0;
+	text-align: center;
+	background-color: #e96656 !important;
+}
+.alert-login-active {
+	background-color: #bb5244 !important;
+	border-top: dotted 1px #ef9a9a;
+	border-bottom: dotted 1px #ef9a9a;
+}
+
+.form-group.label-floating label.control-label, 
+.form-group.label-placeholder label.control-label {
+    top: -9px;
+    font-size: 12px;
+}
+
+.form-control {
+	height: 42px;
+	font-size: 15px;
+}
