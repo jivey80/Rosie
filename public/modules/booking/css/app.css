@@ -1,0 +1,391 @@
+body {
+	margin: 0;
+	padding: 20px;
+	position: relative;
+
+	font-family: 'Lato', tahoma, arial;
+
+	background: url(../images/background.png) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	 	  o-background-size: cover;
+	  		background-size: cover;
+	color: #404040;
+}
+
+/**
+ * Preloader
+ */
+.preloader {
+	width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -30px 0 0 -100px;
+ 
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.booking-preloader {
+	width: 100%;
+    height: 100%;
+    margin: -10px auto 0 -10px;
+    position: absolute;
+    z-index: 1;
+
+ 	background-color: #fff;
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/**
+ * Booking Page
+ */
+.booking-panel {
+	min-width: 380px;
+	max-width: 600px;
+	min-height: 500px;
+	margin: 30px auto;
+
+	background: rgba(255, 255, 255, 0.9);
+	
+	border-radius: 15px;
+	border: 9px solid rgb(0, 0, 0);
+    border: 9px solid rgba(233, 102, 86, .5);
+    -webkit-background-clip: padding-box; /* for Safari */
+			background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+.booking-header {
+	padding: 15px 10px;
+	text-align: center;
+}
+.booking-form {
+	position: relative;
+	padding: 10px 20px 20px 20px;
+}
+.booking-container {
+	padding: 10px 10px 0 10px;
+}
+.booking-divider {
+    padding-top: 15px;
+    margin-top: 25px;
+    border-top: 2px solid #e96656;
+}
+
+.booking-process {
+	padding: 0;
+	margin: 60px 0 15px 0;
+}
+.booking-steps {
+	width: 33.3%;
+	padding: 10px 5px;
+	margin: 0;
+	float: left;
+	display: inline-block;
+
+	text-align: center;
+	font-size: 16px;
+
+	color: #e96656;
+	border-bottom: 3px solid #e96656;
+
+	cursor: pointer;
+}
+.booking-steps span {
+	display: block;
+	font-weight: 500;
+}
+.booking-disabled {
+	background: #eee;
+	color: #999;
+	border-bottom: 3px solid #bdbdbd;
+	cursor: default;
+}
+
+
+.form-footer {
+	padding-top: 15px;
+	margin: 60px -15px 0 -15px;
+	border-top: 2px solid #e96656;
+}
+
+.booking-person {
+	text-align: center;
+}
+.booking-person-name {
+	padding: 0;
+	margin: 5px 0 0 0;
+
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.booking-group {
+	margin: 5px 0;
+	padding: 10px 0;
+	position: relative;
+	border-radius: 3px;
+	color: #000;
+}
+.booking-group:nth-child(odd) {
+	background: rgba(183,28,28, 0.2);
+}
+.booking-group:nth-child(even) {
+	background: rgba(211,47,47, 0.1);
+}
+.booking-title {
+	padding: 5px;
+	margin: 0;
+}
+.booking-options {
+	min-width: 280px;
+	max-width: 520px;
+	height: 115px;
+	margin-top: 15px;
+	position: relative;
+	display: none;
+}
+.arrow-left {
+	left: -35px;
+}
+.arrow-right {
+	right: -35px;
+}
+.arrow-left,
+.arrow-right {
+	height: 100%;
+	position:absolute;
+	z-index: 2;
+	display: block;
+}
+.arrow-icons {
+	position: relative;
+	top: 32%;
+}
+
+.booking-schedule h4,
+.booking-detail h4 {
+	text-align: center;
+	font-size: 17px;
+}
+.booking-detail > button {
+	font-size: 12px !important;
+}
+.booking-detail > button > .material-icons {
+	font-size: 15px !important;
+}
+
+.booking-info {
+	padding-top: 25px;
+}
+.booking-info p {
+	font-size: 15px;
+}
+
+
+.confirmation-img {
+	max-width: 100px;
+	margin: 0 auto;
+}
+.schedule-img {
+	max-width: 70px;
+	margin: 0 auto;
+}
+
+.person-rating .material-icons {
+	font-size: 15px;
+	color: #e65100;
+}
+.person-review {
+	font-size: 11px;
+	font-weight: 700;
+	color: #000;
+}
+
+.schedule-detail {
+    width:100px;
+	padding: 10px;
+	margin: 3px;
+    float:left;
+    
+	font-size: 12px;
+	font-weight: 300;
+	text-align: center;
+
+	color: #000;
+	background: #fff;
+	border: 1px solid #555;
+	border-radius: 3px;
+}
+.schedule-detail:hover {
+	background: #fce4ec;
+	/*border: 1px dashed #880e4f;*/
+	cursor: pointer;
+}
+.schedule-detail .range,
+.schedule-detail .price {
+	padding: 0;
+	margin: 0;
+	font-weight: 600;
+}
+
+.schedule-cheapest {
+	color: #c2185b;
+	border: 1px solid #c2185b;
+	cursor: auto;
+}
+.schedule-disabled,
+.schedule-disabled:hover,
+.schedule-disabled:active {
+	color: #bdbdbd;
+	background: #e0e0e0;
+	border: 1px solid #999;
+	cursor: auto;
+}
+.schedule-selected,
+.schedule-selected:hover,
+.schedule-selected:active {
+	color: #fff;
+	background: #c2185b;
+	border: 1px solid #000;
+}
+
+.schedule-frame-container {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: absolute;
+    overflow-x: hidden;
+}
+.schedule-frame {
+	width: 1500px;
+	margin: 0 auto;
+	/*position: absolute;*/
+	/*left: 0;*/
+}
+
+.booking-error {
+	margin: 100px 0;
+	text-align: center;
+}
+
+.page-title,
+.page-error {
+	font-size: 24px;
+}
+.page-title {
+	margin: 30px auto;
+}
+.page-error {
+	margin: 120px auto;
+	text-align: center;
+}
+
+.confirmation-box {
+	padding-top: 30px;
+}
+
+.back-link {
+    padding: 10px 15px;
+    border-radius: 3px;
+    background: #e96656;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.back-link:hover,
+.back-link:active,
+.back-link:visited,
+.back-link:focus {
+    text-decoration: none;
+    color: #eee;
+    background: #cb4332;
+}
+
+/**
+ * Review
+ */
+.rating-stars .material-icons {
+	font-size: 32px;
+	color: #e65100;
+}
+
+
+/**
+ * Orientation Check
+ */
+.orientation {
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background: #212121;
+	background: rgba(0,0,0, 0.9);
+	color: #fff;
+
+	text-align: center;
+}
+.orientation-info {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	text-align: center;
+	font-size: 15px;
+}
+.orientation-info > .material-icons {
+	font-size: 50px;
+}
+
+
+/**
+ * Fixes
+ */
+.form-spacing {
+	padding: 0 25px;
+}
+.form-control {
+	height: 42px;
+	font-size: 15px;
+}
+.form-group.label-floating label.control-label, 
+.form-group.label-placeholder label.control-label {
+	top: -9px;
+    font-size: 13px;
+}
+.form-group.label-static label.control-label,
+.form-group.label-floating.is-focused label.control-label,
+.form-group.label-floating:not(.is-empty) label.control-label {
+	top: -36px !important;
+	left: 48px !important;
+}
+.form-group .checkbox label, 
+.form-group .radio label, 
+.form-group label {
+	color: #666;
+}
+.form-control, 
+.form-group 
+.form-control {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.hide {
+	display: none;
+}

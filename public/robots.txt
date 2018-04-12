@@ -1,0 +1,11 @@
+# www.robotstxt.org/
+
+# Allow crawling of all content
+User-agent: *
+
+# Except the following:
+Disallow: /template
+Disallow: /template/*
+Disallow: /assets/images/avatar
+Disallow: /assets/images/cleaners
+Disallow: /admin/*
