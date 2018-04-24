@@ -1,5 +1,5 @@
 <div style="width: 100%; height: 100%; background: #fff;">
-    <table style="width: 600px; margin: 0 auto; font-family: 'Century Gothic', Verdana, Tahoma, Arial; font-size: 17px;">
+    <table style="border-collapse: collapse; width: 600px; margin: 0 auto; font-family: 'Century Gothic', Verdana, Tahoma, Arial; font-size: 17px;">
         <tr>
             <td colspan="2">
                 <div style="width: 200px; height: 100px; margin: 0 auto;">

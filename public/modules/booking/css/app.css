@@ -45,12 +45,12 @@ body {
 /**
  * Booking Page
  */
-.booking-panel {
+.booking-panel,
+.payment-panel {
 	min-width: 380px;
 	max-width: 600px;
-	min-height: 500px;
-	margin: 30px auto;
-
+	margin: 30px auto 5px auto;
+	
 	background: rgba(255, 255, 255, 0.9);
 	
 	border-radius: 15px;
@@ -59,6 +59,10 @@ body {
     -webkit-background-clip: padding-box; /* for Safari */
 			background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 }
+.booking-panel {
+	min-height: 500px;	
+}
+
 .booking-header {
 	padding: 15px 10px;
 	text-align: center;
@@ -388,4 +392,16 @@ body {
 }
 .hide {
 	display: none;
+}
+.payment-footer {
+	margin-top: 10px;
+	font-style: italic;
+	color: #000;
+}
+.payment-footer a {
+	color: #e96656;
+	font-weight: 500;
+}
+.stripe-img {
+	padding-top: 10px;
 }

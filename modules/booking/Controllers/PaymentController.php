@@ -13,7 +13,9 @@ class PaymentController extends Controller
 {
 	public function payment_page()
 	{
-		return view(MODULE . '::booking.payment');
+		return view(MODULE . '::booking.payment', array(
+			'type' => 'payment'
+		));
 	}
 
 	public function payment()

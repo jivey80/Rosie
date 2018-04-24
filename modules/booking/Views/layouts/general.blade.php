@@ -48,7 +48,7 @@
         <![endif]-->
 
 
-        <div class="booking-panel">
+        <div class={{ (isset($type) && $type === 'payment') ? 'payment-panel' : 'booking-panel' }}>
             <div class="booking-form">
                 <div id="booking_form">
 

@@ -89,7 +89,6 @@ class BookingController extends Controller
 
 					// Save booking status
 					$save = BookingModel::confirm_booking($booking_id, $client_id, $schedule_id);
-					// $save = true;
 
 					if ($save) {
 

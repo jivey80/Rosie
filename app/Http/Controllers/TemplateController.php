@@ -12,7 +12,6 @@ class TemplateController extends Controller
 		return view('mailer.booking.confirmation', array(
 			'logo' => ASSET_LOGO,
 			'name' => 'John Doe',
-			'link' => 'http://www.google.com',
 
 			'date' => 'Wednesday, September 30',
 			'time' => '09:00 AM to 10:00 AM',
@@ -21,7 +20,9 @@ class TemplateController extends Controller
 
 			'avatar' => ASSET_AVATAR_TMP,
 			'cleaner' => 'Emma Watson',
-			'rating' => 3.5
+			'rating' => 3.5,
+
+			'link' => 'http://www.google.com',
 		));
 	}
 
@@ -37,7 +38,9 @@ class TemplateController extends Controller
 			'time' => '09:00 AM to 10:00 AM',
 
 			'avatar' => ASSET_AVATAR_TMP,
-			'rating' => 3.5
+			'rating' => 3.5,
+
+			'link' => 'http://www.google.com',
 		));
 	}
 

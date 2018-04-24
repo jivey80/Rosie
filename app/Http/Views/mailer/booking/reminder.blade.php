@@ -1,5 +1,5 @@
 <div style="width: 100%; height: 100%; background: #fff;">
-    <table style="width: 600px; margin: 0 auto; font-family: 'Century Gothic', Verdana, Tahoma, Arial; font-size: 17px;">
+    <table style="border-collapse: collapse; width: 600px; margin: 0 auto; font-family: 'Century Gothic', Verdana, Tahoma, Arial; font-size: 17px;">
         <tr>
             <td colspan="2">
                 <div style="width: 200px; height: 100px; margin: 0 auto;">
@@ -50,7 +50,9 @@
         <tr>
             <td style="padding: 30px 10px 10px 10px;" colspan="2">
                 <br />
-                <p style="padding: 0; margin: 0;">Rosie Services Support</p>
+                <div style="width: 100%; text-align: center;">
+                    <a href="{{$link}}" target="_blank" style="padding: 10px; margin: 0 auto; border-radius: 5px; border: 3px solid #e96656; color: #e96656; text-decoration: none; text-transform: uppercase;">Confirm Booking</a>
+                </div>
             </td>
         </tr>
     </table>

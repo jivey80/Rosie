@@ -98,26 +98,20 @@ class CronController extends Controller
 	public function booking_reminder()
 	{
 		$sent = array();
+		$for_update = array();
 
 		$slots = CronModel::get_running_slots();
-
-		$for_update = array();
 
 
 		if ($slots and defined('BOOKING_REMINDER_TIME')) {
 
-			$effectivity = BOOKING_REMINDER_TIME;
+			$effectivity = BOOKING_REMINDER_TIME / 24;
 			$now_timestamp = strtotime(date(TIMESTAMP_FORMAT));
 
 
 			foreach ($slots as $key => $slot) {
 
-				$slt_datetime = "{$slot->date_start} {$slot->schedule_start}";
-				$slt_timestamp = strtotime($slt_datetime);
-
-				$sub_timestamp = strtotime("-{$effectivity} hours", $slt_timestamp);
-
-				if ($sub_timestamp <= $now_timestamp) {
+				if ($slot->countdown == $effectivity) {
 
 					$payload = typecast(array(
 						's_id' => "t{$slot->timetable_id}_o0_na",
@@ -128,16 +122,18 @@ class CronController extends Controller
 					$summary = BookingMainController::slot_summary($payload);
 
 					$template = Template::generate('reminder', array(
-						'logo' => ASSET_LOGO,
-						'name' => ucwords($slot->client_name),
-						'cleaner' => "{$summary['firstname']} {$summary['lastname']}",
+						'logo' 		=> ASSET_LOGO,
+						'name' 		=> ucwords($slot->client_name),
+						'cleaner' 	=> "{$summary['firstname']} {$summary['lastname']}",
 
-						'total' => $summary['price'],
-						'date' => $summary['date_available'],
-						'time' => "{$summary['schedule_start']} to {$summary['schedule_end']}",
+						'total' 	=> $summary['price'],
+						'date' 		=> $summary['date_available'],
+						'time' 		=> "{$summary['schedule_start']} to {$summary['schedule_end']}",
 
-						'avatar' => $summary['avatar'],
-						'rating' => $summary['rate']
+						'avatar' 	=> $summary['avatar'],
+						'rating' 	=> $summary['rate'],
+
+						'link' 		=> 'https://www.google.com'
 					));
 
 					// Send email reminder
