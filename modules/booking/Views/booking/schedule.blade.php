@@ -36,7 +36,7 @@
 										<h4><b>Sold Out!</b></h4>
 									@else
 										<h4><b>${{ $schedule['cheapest'] }}/hour</b></h4>
-										<button type="button" class="btn btn-raised btn-info btn-xs booking-details" id="schedule_{{ $schedule['timetable_id'] }}" data-toggle="0">
+										<button type="button" class="btn btn-raised btn-info btn-rosie btn-xs booking-details" id="schedule_{{ $schedule['timetable_id'] }}" data-toggle="0">
 											Details <i class="material-icons">arrow_downward</i>
 										</button>
 									@endif
@@ -51,7 +51,7 @@
 				<!-- Time slots list -->
 				<div class="booking-options" id="booking_option_{{ $schedule['timetable_id'] }}">
 					<div class="arrow-left panner" data-scroll-modifier="-1">
-						<a href="javascript:void(0)" class="btn btn-fab-mini btn-info btn-fab arrow-icons">
+						<a href="javascript:void(0)" class="btn btn-fab-mini btn-info btn-rosie btn-fab arrow-icons">
 							<i class="material-icons">keyboard_arrow_left</i>
 						</a>
 					</div>
@@ -61,7 +61,7 @@
 					</div>
 
 					<div class="arrow-right panner" data-scroll-modifier="1">
-						<a href="javascript:void(0)" class="btn btn-fab-mini btn-info btn-fab arrow-icons">
+						<a href="javascript:void(0)" class="btn btn-fab-mini btn-info btn-rosie btn-fab arrow-icons">
 							<i class="material-icons">keyboard_arrow_right</i>
 						</a>
 					</div>
@@ -80,12 +80,12 @@
 	<div class="booking-divider">
 		@if ($schedules)
 	    <div class="pull-right">
-	        <button type="button" class="btn btn-raised btn-info" id="schedule_next">Next</button>
+	        <button type="button" class="btn btn-raised btn-info btn-rosie" id="schedule_next">Next</button>
 	    </div>
 	    @endif
 
 	    <div class="pull-left">
-	        <button type="button" class="btn btn-raised btn-info" id="schedule_prev">Review</button>
+	        <button type="button" class="btn btn-raised btn-info btn-rosie" id="schedule_prev">Review</button>
 	    </div>
 
 	    <div class="clearfix"></div>

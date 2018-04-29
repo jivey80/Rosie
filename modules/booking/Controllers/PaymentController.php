@@ -31,11 +31,11 @@ class PaymentController extends Controller
 			'source'  	=> $token
 		));
 
-		$charge = \Stripe\Charge::create(array(
-			'customer' => $customer->id,
-			'amount'   => $payment,
-			'currency' => 'usd'
-		));
+		// $charge = StripeCharge::create(array(
+		// 	'customer' => $customer->id,
+		// 	'amount'   => $payment,
+		// 	'currency' => 'usd'
+		// ));
 
 		echo '<h3 style="font-family: tahoma, consolas;">Successfully charged $50.00!</h3>';
 	}

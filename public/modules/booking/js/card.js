@@ -73,7 +73,12 @@
 
 		// Input must be an integer
 		if (! this.is_numeric(_data)) {
+		
 			dom.val('');
+		
+		} else {
+
+			_data = (_data.charAt(0) == 0) ? _data.substring(1) : _data;
 		}
 
 

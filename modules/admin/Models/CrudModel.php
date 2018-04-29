@@ -135,9 +135,11 @@ class CrudModel
 
 	private static function edit_record($table = '', $id = 0, $data = array())
 	{
-		return 	DB::table($table->name)
-				->where($table->pkid, '=', $id)
-				->update($data);
+		DB::table($table->name)
+		->where($table->pkid, '=', $id)
+		->update($data);
+
+		return true;
 	}
 
 	private static function delete_record($table = '', $id = 0)

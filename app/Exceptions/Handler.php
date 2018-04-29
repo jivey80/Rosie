@@ -57,6 +57,7 @@ class Handler extends ExceptionHandler
             $errline = $e->getLine();
             $errfile = $e->getFile();
 
+            $_message = $message;
 
             if ($e instanceof TokenMismatchException ) {
                 $message = 'Token Mismatch. Please reload the page.';
@@ -77,7 +78,8 @@ class Handler extends ExceptionHandler
             $error_log_summary = array(
                 'Trace' => date(TIMESTAMP_FULL_FORMAT),
                 'Error Code' => $e->getCode(),
-                'Message' => $message,
+                'Message' => $_message,
+                'Summary' => $message,
                 'Line' => $errline,
                 'File' => $errfile,
                 'Source' => $url

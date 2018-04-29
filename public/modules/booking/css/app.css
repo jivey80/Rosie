@@ -393,6 +393,7 @@ body {
 .hide {
 	display: none;
 }
+
 .payment-footer {
 	margin-top: 10px;
 	font-style: italic;
@@ -404,4 +405,15 @@ body {
 }
 .stripe-img {
 	padding-top: 10px;
+}
+.stripe-error {
+	padding-bottom: 15px;
+	font-weight: bold;
+}
+
+.btn-rosie {
+	background-color: #f44336 !important;
+}
+.btn-rosie:hover {
+	background-color: #f55549 !important;
 }

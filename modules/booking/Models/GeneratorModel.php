@@ -446,6 +446,10 @@ class GeneratorModel
 					$new_padding = $min_padding * 5;
 					$padding = $new_padding * 60;
 
+					if ($padding == 0) {
+						$padding = SCHEDULE_PADDING;
+					}
+
 				} else {
 
 					$padding = 0;

@@ -30,15 +30,15 @@
 
     <div class="form-footer">
         <div class="pull-right">
-            <button type="button" class="btn btn-raised btn-info" id="confirmation_next">Proceed Booking</button>
+            <button type="button" class="btn btn-raised btn-info btn-rosie" id="confirmation_next">Proceed Booking</button>
         </div>
 
         <div class="text-center">
-            <button type="button" class="btn btn-raised btn-info hide" id="back_to_main">Book another slot</button>
+            <button type="button" class="btn btn-raised btn-info  btn-rosie hide" id="back_to_main">Book another slot</button>
         </div>
 
         <div class="pull-left">
-            <button type="button" class="btn btn-raised btn-info" id="confirmation_prev">Back</button>
+            <button type="button" class="btn btn-raised btn-info btn-rosie" id="confirmation_prev">Back</button>
         </div>
 
         <div class="clearfix"></div>

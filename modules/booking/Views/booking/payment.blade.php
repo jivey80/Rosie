@@ -4,47 +4,13 @@
 
 <p class="page-title"> Booking will be confirmed once the payment was successfully made. </p>
 
-<form id="formLogin" class="form-horizontal form-spacing" method="POST" action="" autocomplete="off">
-    <div class="form-group">
-        <div class="col-sm-12">
-            <div class="form-group label-floating">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">credit_card</i>
-                    </span>
-                
-                    <label class="control-label" for="creditcard">CARD NUMBER</label>
-                    <input class="form-control" id="creditcard" type="text" tabindex="1" autofocus="autofocus" autocomplete="off" />
-                </div>
-            </div>
-        </div>
+<br />
 
-        <div class="col-sm-6">
-            <div class="form-group label-floating">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">date_range</i>
-                    </span>
-                
-                    <label class="control-label" for="expiration">MM/YY</label>
-                    <input class="form-control" id="expiration" type="text" tabindex="2" autocomplete="off" />
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-6">
-            <div class="form-group label-floating">
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="material-icons">fingerprint</i>
-                    </span>
-                
-                    <label class="control-label" for="cvc">CVC</label>
-                    <input class="form-control" id="cvc" type="password" tabindex="3" autocomplete="off" />
-                </div>
-            </div>
-        </div>
-    </div>
+<form id="payment_form" class="form-horizontal form-spacing" method="POST" action="payment" autocomplete="off">
+    <div class="text-danger stripe-error" id="payment_error"></div>
+    <div id="creditcard"></div>
+    <button type="button" class="btn btn-sm btn-raised btn-info btn-rosie btn-block" id="payment_submit">PROCEED</button>
 </form>
 
 <br />
@@ -63,29 +29,72 @@
 </div>
 
 
-<!-- <div class="booking-divider text-center">
-    <a href="javascript:void(0)" class="btn btn-raised btn-info btn-lg">CONFIRM PAYMENT</a>
-</div> -->
-
-
-<!-- <form action="payment" method="POST">
-    <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="{{ APIKEY_STRIPE_PKEY }}"
-        data-amount="2500"
-        data-name="Rosie Services"
-        data-description="Booking Payment"
-        data-image="{{ ASSET_LOGO }}"
-        data-locale="auto"
-        data-email="client_a@gmail.com"
-        data-allow-remember-me="false">
-    </script>
-</form> -->
-
-
-
 @endsection
 
 @section('script')
 <script src="{{ MODULE_ASSETS_URL }}/js/card.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+
+    +function () {
+
+        // Stripe API Key
+        var stripe = Stripe('{{ APIKEY_STRIPE_PKEY }}');
+        var elements = stripe.elements();
+
+        // Custom Styling
+        var style = {
+            base: {
+                color: '#32325d',
+                lineHeight: '24px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#ef9a9a'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>
+        card.mount('#creditcard');
+
+        // Handle real-time validation errors from the card Element.
+        $('#payment_submit').on('click', function () {
+
+            stripe.createToken(card).then(function(result) {
+                    
+                if (result.error) {
+
+                    // Inform the user if there was an error
+                    $('#payment_error').html('Error: ' + result.error.message);
+
+                    return false;
+
+                } else {
+
+                    var form_dom = $('#payment_form'),
+                        form_token = result.token.id;
+
+                    form_dom.append([
+                        '<input',
+                            'type="hidden"',
+                            'name="stripeToken"',
+                            'value="' + form_token + '"',
+                        '/>'
+                    ].join(' '));
+
+                    return form_dom.submit();
+                }
+            });
+        });
+    }();
+</script>
 @endsection

@@ -91,12 +91,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-center">
-                <a href="https://stripe.com/" target="_new">
-                    <img src="{{ ASSET_IMG . '/powered_by_stripe.png' }}" class="stripe-img" width="120" />
-                </a>
-            </div>
         </div>
 
         <div id="orientation" class="orientation">

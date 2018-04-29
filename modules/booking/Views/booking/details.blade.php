@@ -50,7 +50,7 @@
     
     <div class="form-footer">
         <div class="pull-right">
-            <button type="button" class="btn btn-raised btn-info" id="details_next">Next</button>
+            <button type="button" class="btn btn-raised btn-info btn-rosie" id="details_next">Next</button>
         </div>
 
         <div class="pull-left">
