@@ -8,8 +8,8 @@ use Modules\Admin\Models\AdminModel;
 class ModuleServiceProvider extends ServiceProvider
 {
 	private static $modules = array(
-		'booking',
-		'admin'
+		'admin',
+		'booking'
 	);
 
 	public function register()
@@ -49,15 +49,17 @@ class ModuleServiceProvider extends ServiceProvider
 		}
 	}
 
-	private static function _is_valid_module($uri)
+	private static function _is_valid_module($uri = '')
 	{
 		$modules = defined('VALID_MODULES') ? unserialize(VALID_MODULES) : self::$modules;
 
 		if ($uri) {
 
+			$actual_uri = self::_get_route($uri);
+
 			foreach ($modules as $module) {
 
-				if (strpos($uri, $module) !== false) {
+				if (strpos($actual_uri, $module) !== false) {
 
 					// Set module constants
 					define('MODULE', $module);
@@ -73,5 +75,22 @@ class ModuleServiceProvider extends ServiceProvider
 		}
 
 		return false;
+	}
+
+	private static function _get_route($uri = '')
+	{
+		if ($uri) {
+
+			$segment = 3;
+
+			$uri_arr = explode('/', $uri);
+			$uri_cnt = count($uri_arr);
+			
+			$route_arr = array_slice($uri_arr, $uri_cnt - $segment);
+
+			return implode('/', $route_arr);
+		}
+
+		return $uri;
 	}
 }

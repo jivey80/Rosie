@@ -11,8 +11,8 @@ define('PROJECT_NAME', 		'Rosie Booking');
  */
 // Valid modules
 define('VALID_MODULES', serialize(array(
-		'booking',
-		'admin'
+		'admin',
+		'booking'
 	))
 );
 

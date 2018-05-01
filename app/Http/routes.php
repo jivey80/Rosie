@@ -20,9 +20,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
 	// Authentication
-    Route::get('{module}/login', 	'AuthController@showLoginForm');
-    Route::post('{module}/login', 	'AuthController@login');
-    Route::get('{module}/logout', 	'AuthController@logout');
+    Route::get('/admin/login', 	'AuthController@showLoginForm');
+    Route::post('/admin/login', 	'AuthController@login');
+    Route::get('/admin/logout', 	'AuthController@logout');
 
 
     // Registration

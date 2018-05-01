@@ -114,7 +114,9 @@ class CronModel
 					'a.schedule_start',
 					'a.schedule_end',
 
-					DB::raw("DATEDIFF(a.confirmed_at, DATE(NOW())) as countdown")
+					'a.confirmed_at',
+
+					DB::raw("DATEDIFF(DATE(b.date_available), DATE(a.confirmed_at)) as countdown")
 				)->get();
 	}
 

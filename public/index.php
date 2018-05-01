@@ -5,7 +5,7 @@
  * @copyright 02.26.2017
  * @package  Laravel 5.2
  */
-define('PROJECT_VERSION', 'v2.48');
+define('PROJECT_VERSION', 'v2.49');
 
 /*
 |--------------------------------------------------------------------------

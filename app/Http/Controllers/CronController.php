@@ -111,7 +111,7 @@ class CronController extends Controller
 
 			foreach ($slots as $key => $slot) {
 
-				if ($slot->countdown == $effectivity) {
+				if ($slot->countdown > $effectivity) {
 
 					$payload = typecast(array(
 						's_id' => "t{$slot->timetable_id}_o0_na",
