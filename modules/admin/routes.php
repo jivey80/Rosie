@@ -32,6 +32,7 @@ Route::group(array(
 
 
 		// General
-		Route::post('/get_form_data/{method}', 'CrudController@get_form_data');
+		Route::post('/get_form_data/{method}', 	'CrudController@get_form_data');
+		Route::post('/get_subscription_link', 	'CrudController@get_subs_link');
 	}
 );

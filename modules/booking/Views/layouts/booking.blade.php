@@ -26,7 +26,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 
-        @if(ENVIRONMENT === 'local')
+        @if(ENVIRONMENT === 'local' and FORCE_MIN_ASSETS === false)
         
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/materialicons.css" />
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/bootstrap/css/bootstrap.min.css" />
@@ -110,7 +110,7 @@
             console.log('%c'+__PRJ_INFO.join(' | '), 'padding: 0 14px; border-left: 7px solid #53082a; border-right: 7px solid #53082a; background: #d11569; color: #fff;');
         </script>
         
-        @if(ENVIRONMENT === 'local')
+        @if(ENVIRONMENT === 'local' and FORCE_MIN_ASSETS === false)
             <script src="{{ baseurl() }}/assets/vendors/jquery/jquery-3.3.1.min.js"></script>
             <script src="{{ baseurl() }}/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
             <script src="{{ baseurl() }}/assets/vendors/materialize/js/ripples.min.js"></script>

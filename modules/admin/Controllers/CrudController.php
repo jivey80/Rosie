@@ -6,6 +6,7 @@ use HttpRequest;
 use Validator;
 use Input;
 use Modules\Admin\Models\CrudModel;
+use Aes;
 use Msg;
 use Template;
 
@@ -236,6 +237,24 @@ class CrudController extends Controller
 		return $data;
 	}
 
+	public function get_subs_link()
+	{
+		if (Input::has(array('fname', 'email'))) {
+
+			$fname = Input::get('fname');
+			$email = Input::get('email');
+
+			$baseurl = str_replace('/admin', '/booking/stripe', MODULE_BASE_URL);
+			$payload = Aes::payload(array(
+				'fname' => $fname,
+				'email' => $email,
+				'ftype' => 'subscription'
+			));
+
+			return Msg::success(" Later on, this link should be sent automatically to the client as an email with 12 hour link validity. <a href=\"{$baseurl}?payload={$payload}\" target=\"_blank\">CLICK TO SEE SAMPLE SUBSCRIPTION LINK.</a>");
+		}
+	}
+
 	private static function __filter_timetables($data)
 	{
 		if ($data) {
@@ -302,11 +321,8 @@ class CrudController extends Controller
 				case 'administrators':
 					if (isset($module_info['email'], $update_info['plain_password'])) {
 
-						$email = $module_info['email'];
-
-						$password = $update_info['plain_password'];
-
-
+						$email 		= $module_info['email'];
+						$password 	= $update_info['plain_password'];
 					}
 					break;
 				

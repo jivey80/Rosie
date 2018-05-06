@@ -38,6 +38,7 @@ function __fn_optimize_assets(filetype, params)
 
 		}
 
+
 		run.pipe(plumber(function(error) {
             console.error(error.message);
             gulp.emit('finish');
@@ -47,8 +48,8 @@ function __fn_optimize_assets(filetype, params)
 			console.log('-> ' + params.dest + '/' + params.file);
 		}));
 
-		return true;
 
+		return true;
 	}
 
 	console.log('Parameter fucked up.');
@@ -114,7 +115,7 @@ gulp.task('rosies', function () {
 	        project_location + 'public/assets/vendors/datatables/editor/dataTables.select.1.2.2.min.js',
 	        project_location + 'public/assets/vendors/datatables/editor/dataTables.responsive.2.1.1.min.js',
 	        project_location + 'public/assets/vendors/fileinput/js/fileinput.4.4.8min.js',
-	        project_location + 'public/assets/vendors/fileinput/js/purify.min.js',
+	        project_location + 'public/assets/vendors/fileinput/js/purify.min.js'
 		]
 	});
 
@@ -139,6 +140,14 @@ gulp.task('rosies', function () {
 		files: [
 			project_location + 'public/assets/js/plugins.js',
 			project_location + 'public/modules/booking/js/app.js'
+		]
+	});
+
+	__fn_optimize_assets('js', {
+		file: 'stripe.min.js',
+		dest: project_location + 'public/modules/booking/build',
+		files: [
+			project_location + 'public/modules/booking/js/stripe.js'
 		]
 	});
 

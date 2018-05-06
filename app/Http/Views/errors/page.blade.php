@@ -65,7 +65,7 @@
                 
                 @if(config('app.debug') === true)
                 <div style="margin-top: 30px; padding: 5px 10px; background: #666; color: #fff; font-family: consolas;">
-                    {{ $message }} <br /> on {{ $file }} [Line: {{ $line }}] 
+                    {{ $message }} <br /> {{ isset($file) ? "on {$file}" : '' }} {{ isset($line) ? "[Line: {$line }]" : '' }} 
                 </div>
                 @endif
             </div>

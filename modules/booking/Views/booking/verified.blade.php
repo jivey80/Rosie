@@ -35,7 +35,7 @@
     <div class="clearfix"></div>
 
     <div class="booking-divider text-center">
-        <a href="{{ $link }}" class="btn btn-raised btn-info btn-lg">Book another Slot</a>
+        <a href="{{ $link }}" class="btn btn-raised btn-info btn-rosie btn-lg">Book another Slot</a>
     </div>
 
 

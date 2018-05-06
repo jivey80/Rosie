@@ -104,6 +104,25 @@ if (typeof jQuery === 'undefined') {
 				default: break;
 			}
 		});
+
+
+		// Stripe subscription links
+		$('.stripe-send-link').on('click', function () {
+			
+			var dom = $(this),
+				data = {
+					fname: dom.data('fname'),
+					email: dom.data('email')
+				};
+
+			// Generate payload from the fullname and email
+			ajax_call('get_subscription_link', data, function (response) {
+
+				if (response.hasOwnProperty('status')) {
+					notify(response.status, response.message);
+				}
+			});
+		});
 	};
 
 	Dashboard.prototype.CRUDModules = {

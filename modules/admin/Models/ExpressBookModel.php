@@ -102,13 +102,11 @@ class ExpressBookModel
 
 
 					// Generate email confirmation link
-					// ...
 					$payload = Aes::payload(array(
 						'c_id' => $client_id,
 						's_id' => $group_id,
 						'prc' => $data['price']
 					));
-
 
 					$data['client_id'] = $client_id;
 					$data['timetable_id'] = $timetable_id;

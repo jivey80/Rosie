@@ -377,7 +377,7 @@ body {
 .form-group.label-floating.is-focused label.control-label,
 .form-group.label-floating:not(.is-empty) label.control-label {
 	top: -36px !important;
-	left: 48px !important;
+	font-size: 15px;
 }
 .form-group .checkbox label, 
 .form-group .radio label, 
@@ -389,6 +389,10 @@ body {
 .form-control {
 	padding-left: 10px;
 	padding-right: 10px;
+}
+.form-group-slim {
+	margin-top: 0;
+	font-size: 15px;
 }
 .hide {
 	display: none;
@@ -409,11 +413,14 @@ body {
 .stripe-error {
 	padding-bottom: 15px;
 	font-weight: bold;
+	font-size: 13px;
 }
 
 .btn-rosie {
-	background-color: #f44336 !important;
+	background-color: #ef9a9a !important;
+	color: #424242 !important;
 }
 .btn-rosie:hover {
 	background-color: #f55549 !important;
+	color: #fff !important;
 }

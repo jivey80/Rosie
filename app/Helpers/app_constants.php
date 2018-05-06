@@ -37,9 +37,13 @@ define('BOOKING_TIMESTAMP', 		'l, F j');
 define('BOOKING_TIMESTAMP_FULL', 	'l, F j, Y');
 
 
+// PAYLOADS
+define('EXPIRE_SUBS', 43200); // Subs link validity at 12 hours
+
+
 // Dev tools
 // -----
 // Force the use of minified assets
 // on local
-define('FORCE_MIN_ASSETS', false);
+define('FORCE_MIN_ASSETS', true);
 define('DEV_EMAIL', 'jedianela14@gmail.com');

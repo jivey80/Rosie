@@ -245,6 +245,8 @@ class AdminModel
 
 	public static function client()
 	{
+		// $link_sql = "";
+
 		$rows = DB::table('client')
 				->where('is_active', '=', 1)
 				->select(
@@ -256,7 +258,8 @@ class AdminModel
 					'latitude',
 					'longitude',
 					'contact_number',
-					DB::raw("DATE_FORMAT(date_registered, '%Y, %b %d (%h:%s %p)') as date_registered")
+					DB::raw("DATE_FORMAT(date_registered, '%Y, %b %d (%h:%s %p)') as date_registered"),
+					DB::raw("(CASE WHEN stripe_id IS NULL THEN 'SEND LINK' WHEN stripe_id = '' THEN 'SEND LINK' ELSE 'SUBSCRIBED' END) as stripe_subscribe_link")
 				)->get();
 
 		return grid_json(
@@ -270,7 +273,8 @@ class AdminModel
 				'latitude',
 				'longitude',
 				'contact_number',
-				'date_registered'
+				'date_registered',
+				'stripe_subscribe_link'
 			),
 			array(
 				'fullname',

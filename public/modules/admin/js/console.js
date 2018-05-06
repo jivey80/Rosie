@@ -491,6 +491,33 @@ if (typeof jQuery === 'undefined') {
 										return '<img src="' + __AVATAR_URL + '/' + data + '" class="datatable-avatar" />';
 									}
 								}
+							],
+							clients: [
+								{
+									// Subscription links
+									targets: 9,
+									render: function (data, type, row) {
+
+										var link_class = (data === 'SUBSCRIBED')
+
+										if (data === 'SUBSCRIBED') {
+
+											return [
+												'<div class="text-center">',
+													'<p class="stripe-subscribe-link">' + data + '</p>',
+												'</div>'
+											].join('');
+
+										} else {
+
+											return [
+												'<div class="text-center">',
+													'<a class="stripe-send-link btn btn-xs btn-raised btn-warning" data-fname="' + row[1] + '" data-email="' + row[3] + '">' + data + '</a>',
+												'</div>'
+											].join('');
+										}
+									}
+								}
 							]
 						};
 

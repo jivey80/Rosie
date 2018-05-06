@@ -6,6 +6,12 @@ namespace App\Libraries;
 class Aes
 {
     private static $m = 'AES-256-CFB';
+    private static $ts = 'Y-m-d H:i:s';
+
+    private static function timestamp()
+    {
+        return strtotime(date(self::$ts));
+    }
 
     public static function encrypt($data = '', $pass = '')
     {
@@ -23,7 +29,7 @@ class Aes
     public static function payload($params, $pass = '') {
 
         $data = array(
-            'ts' => strtotime(date('Y-m-d H:i:s'))
+            'ts' => self::timestamp()
         );
 
         if (is_array($params)) {
@@ -39,6 +45,29 @@ class Aes
         $recode = self::encrypt(json_encode($data), $pass);
 
         return urlencode($recode);
+    }
+
+    public static function verify_payload($payload = '', $expiry = 0, $pass = '')
+    {
+        $de = self::decrypt($payload, $pass);
+        
+        $pl = json_decode($de);
+
+        $dt = is_object($pl) ? $pl : $de;
+
+        if (isset($dt->ts)) {
+
+            $offset = self::timestamp() - $dt->ts;
+
+            if ($expiry == 0 or $offset <= $expiry) {
+
+                return $de;
+            }
+
+            return false;
+        }
+
+        return $de;
     }
 
 

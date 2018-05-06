@@ -15,8 +15,8 @@ Route::group(array(
 		Route::get('/review', 			'BookingController@review_page');
 
 		// Stripe Integration
-		Route::get('/payment', 			'PaymentController@payment_page');
-		Route::post('/payment', 		'PaymentController@payment');
+		Route::get('/stripe', 			'PaymentController@index');
+		Route::post('/stripe', 			'PaymentController@process');
 
 		// API
 		Route::post('/list_schedule', 	'GeneratorController@list_schedule');

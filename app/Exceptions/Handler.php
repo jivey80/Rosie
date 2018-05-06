@@ -71,6 +71,10 @@ class Handler extends ExceptionHandler
                 $message = 'Something went terribly wrong.';
             }
 
+            if (! $_message) {
+                $_message = 'Something went terribly wrong. Please try again later.';
+            }
+
 
             // Writes all the reported errors 
             // to error log file located
@@ -85,11 +89,10 @@ class Handler extends ExceptionHandler
                 'Source' => $url
             );
 
+            // Write the log on file
             log_write('errors', $error_log_summary);
 
             $error = Msg::error($error_log_summary);
-
-
             return (is_array($error)) ? response()->json($error) : response()->view('errors.page', array(
                 'message' => $message,
                 'line' => $errline,
