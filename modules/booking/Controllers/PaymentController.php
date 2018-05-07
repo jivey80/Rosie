@@ -146,7 +146,7 @@ class PaymentController extends Controller
 	{
 		// Verify if the email has the 
 		// Stripe Customer ID.
-		if ($user_data and isset($user_data->stripe_id)) {
+		if ($user_data and !$user_data->stripe_id) {
 
 			Stripe::setApiKey(APIKEY_STRIPE_SKEY);
 
@@ -162,12 +162,19 @@ class PaymentController extends Controller
 				));
 
 				return self::redirect(
-					'Subscription Confirmed!',
+					'Payment details confirmed!',
 					'You are now integrated to Stripe.'
 				);
 			}
+
+		} else {
+
+			return self::redirect(
+				'Session Invalid.', 
+				"Your account has with email <i>{$email}</i> has already been subscribed.",
+				true
+			);
 		}
-		dd(12, $user_data, isset($user_data->stripe_id));
 	}
 
 	public static function redirect($title = '', $message = '', $is_error = false)

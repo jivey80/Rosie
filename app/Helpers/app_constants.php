@@ -45,5 +45,5 @@ define('EXPIRE_SUBS', 43200); // Subs link validity at 12 hours
 // -----
 // Force the use of minified assets
 // on local
-define('FORCE_MIN_ASSETS', true);
+define('FORCE_MIN_ASSETS', false);
 define('DEV_EMAIL', 'jedianela14@gmail.com');
