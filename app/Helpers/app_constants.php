@@ -38,7 +38,7 @@ define('BOOKING_TIMESTAMP_FULL', 	'l, F j, Y');
 
 
 // PAYLOADS
-define('EXPIRE_SUBS', 43200); // Subs link validity at 12 hours
+define('EXPIRE_SUBS', 86400); // Subs link validity at 24 hours
 
 
 // Dev tools
