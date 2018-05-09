@@ -108,45 +108,52 @@ class CronController extends Controller
 			$effectivity = BOOKING_REMINDER_TIME / 24;
 			$now_timestamp = strtotime(date(TIMESTAMP_FORMAT));
 
-
 			foreach ($slots as $key => $slot) {
 
+				// Filter bookings that has the acceptable
+				// interval between the booking date and confirmation date.
 				if ($slot->countdown > $effectivity) {
 
-					$payload = typecast(array(
-						's_id' => "t{$slot->timetable_id}_o0_na",
-						'b_id' => $slot->booking_id,
-						'prc' => typecast($slot->price, 'float')
-					), 'object');
+					$day_offset = get_date_offset($slot->date_now, $slot->date_start);
 
-					$summary = BookingMainController::slot_summary($payload);
+					// Send the email only one day before the booking date.
+					if ($day_offset === 1) {
 
-					$template = Template::generate('reminder', array(
-						'logo' 		=> ASSET_LOGO,
-						'name' 		=> ucwords($slot->client_name),
-						'cleaner' 	=> "{$summary['firstname']} {$summary['lastname']}",
+						$payload = typecast(array(
+							's_id' => "t{$slot->timetable_id}_o0_na",
+							'b_id' => $slot->booking_id,
+							'prc' => typecast($slot->price, 'float')
+						), 'object');
 
-						'total' 	=> $summary['price'],
-						'date' 		=> $summary['date_available'],
-						'time' 		=> "{$summary['schedule_start']} to {$summary['schedule_end']}",
+						$summary = BookingMainController::slot_summary($payload);
 
-						'avatar' 	=> $summary['avatar'],
-						'rating' 	=> $summary['rate'],
+						$template = Template::generate('reminder', array(
+							'logo' 		=> ASSET_LOGO,
+							'name' 		=> ucwords($slot->client_name),
+							'cleaner' 	=> "{$summary['firstname']} {$summary['lastname']}",
 
-						'link' 		=> 'https://www.google.com'
-					));
+							'total' 	=> $summary['price'],
+							'date' 		=> $summary['date_available'],
+							'time' 		=> "{$summary['schedule_start']} to {$summary['schedule_end']}",
 
-					// Send email reminder
-					if (ENVIRONMENT === 'production') {
+							'avatar' 	=> $summary['avatar'],
+							'rating' 	=> $summary['rate'],
 
-						$bcc = defined('EMAIL_REMINDER_BCC') ? EMAIL_REMINDER_BCC : null;
+							'link' 		=> 'https://www.google.com'
+						));
 
-						emailer($slot->email, "Rosie Booking Reminder", $template, $bcc);
+						// Send email reminder
+						if (ENVIRONMENT === 'production') {
+
+							$bcc = defined('EMAIL_REMINDER_BCC') ? EMAIL_REMINDER_BCC : null;
+
+							emailer($slot->email, "Rosie Booking Reminder", $template, $bcc);
+						}
+
+						$sent[] = $slot;
+
+						$for_update[] = $slot->booking_id;
 					}
-
-					$sent[] = $slot;
-
-					$for_update[] = $slot->booking_id;
 				}
 			}
 

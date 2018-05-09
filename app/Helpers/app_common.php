@@ -84,6 +84,27 @@ if (! function_exists('in_between')) {
     }
 }
 
+if (! function_exists('get_date_offset')) {
+
+    function get_date_offset($date_fm = '', $date_to = '')
+    {
+        $t_date_fm = strtotime($date_fm);
+        $t_date_to = strtotime($date_to);
+
+        if ($t_date_fm and $t_date_to and ($t_date_fm <= $t_date_to)) {
+
+            $t_offset = $t_date_to - $t_date_fm;
+
+            $day = 60 * 60 * 24;
+            $off = $t_offset / $day;
+
+            return ($t_offset / $day);
+        }
+
+        return 0;
+    }
+}
+
 if (! function_exists('schedule_autocorrect')) {
 
 	/**

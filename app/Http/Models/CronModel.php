@@ -116,6 +116,7 @@ class CronModel
 
 					'a.confirmed_at',
 
+					DB::raw("DATE(NOW()) as date_now"),
 					DB::raw("DATEDIFF(DATE(b.date_available), DATE(a.confirmed_at)) as countdown")
 				)->get();
 	}
