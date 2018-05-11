@@ -183,6 +183,7 @@ if (typeof jQuery === 'undefined') {
 
         return $(this).each(function (i, o) {
 
+
             var dom = $(o);
 
             var data = dom.data('response');
@@ -199,6 +200,8 @@ if (typeof jQuery === 'undefined') {
                     var ranking = ctr + 1;
 
                     html.push('<li>');
+
+                        console.log(data[ctr]);
 
                         if (typeof data[ctr] != 'undefined') {
                             
@@ -219,6 +222,10 @@ if (typeof jQuery === 'undefined') {
 
 
                 dom.html(html.join('\n'));
+            
+            } else {
+
+                dom.html('<h4 class="text-center">No available data to display.</h4>');
             }
         });
     };
