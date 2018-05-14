@@ -54,8 +54,6 @@ if (typeof jQuery === 'undefined') {
 
 	Rosie.prototype.device_orientation_check = function () {
 
-		console.log('called');
-
 		if (window.matchMedia("(orientation: portrait)").matches || window.innerHeight > window.innerWidth) {
 
 			$('#orientation').show();
