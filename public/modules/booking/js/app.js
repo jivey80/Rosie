@@ -329,8 +329,14 @@ if (typeof jQuery === 'undefined') {
 
 							self.details_extract(frame_id, response);
 
-							_fn_slotlist_toggle(frame_id);
+							if (response.length) {
+							
+								_fn_slotlist_toggle(frame_id);
+							
+							} else {
 
+								$('#schedule_5').prop('disabled', true).text('FULLY BOOKED');
+							}
 						});
 
 					} else if (is_toggled_int === 1) {
@@ -689,10 +695,6 @@ if (typeof jQuery === 'undefined') {
 
 					}, 100);
 				}
-
-			} else {
-
-				error_call('No details available.');
 			}
 
 		} else {

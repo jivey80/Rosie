@@ -28,12 +28,17 @@ class GeneratorController extends Controller
 
 			if ($timetable_id > 0) {
 
+				// Get the list of active timetables
 				$timetable = GeneratorModel::get_active_timetable();
 
 				// Generate list of schedule based
 				// from the selected interval (hours)
 				$slotlist = GeneratorModel::generate_schedule($timetable, $interval);
-				$slots = GeneratorModel::list_schedule($timetable_id, $slotlist);
+
+
+				// Remove slots that has already passed the 
+				// current time.
+				$slots = timetable_autocorrect(GeneratorModel::list_schedule($timetable_id, $slotlist));
 
 
 				// Get the duration of the timetable as base

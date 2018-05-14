@@ -105,6 +105,34 @@ if (! function_exists('get_date_offset')) {
     }
 }
 
+if (! function_exists('timetable_autocorrect')) {
+
+    function timetable_autocorrect($timetable = array())
+    {
+        if ($timetable) {
+
+            $time_now = strtotime(date('H:i:s'));
+
+            foreach ($timetable as $slot_id => $slot) {
+
+                $time_str = strtotime($slot->start);
+                $time_end = strtotime($slot->end);
+
+                if ($time_now >= $time_str or $time_now >= $time_end) {
+
+                    unset($timetable[$slot_id]);
+                
+                } else if (in_between($time_now, $time_str, $time_end)) {
+
+                    unset($timetable[$slot_id]);
+                }
+            }
+        }
+
+        return $timetable;
+    }
+}
+
 if (! function_exists('schedule_autocorrect')) {
 
 	/**
