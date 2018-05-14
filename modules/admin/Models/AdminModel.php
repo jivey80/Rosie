@@ -103,6 +103,8 @@ class AdminModel
 		return trigger_error('fuck this shit');
 	}
 
+	// Decomissioned and will be replaced by
+	// self::booking_status
 	public static function top_clients()
 	{
 		$rows = DB::table('booking as a')
@@ -135,6 +137,38 @@ class AdminModel
 			)
 		);
 	}
+
+	public static function booking_summary()
+	{
+		$rows = 	DB::table('booking as a')
+					->join('timetable as b', 'b.timetable_id', '=', 'a.timetable_id')
+					->join('client as c', 'c.client_id', '=', 'a.client_id')
+					->orderBy('b.date_available', 'ASC')
+					->orderby('a.schedule_start', 'ASC')
+					->select(
+						'a.booking_id',
+
+						'c.fullname',
+						'c.address',
+
+						'b.date_available as date',
+						'a.schedule_start as start',
+						'a.schedule_end as end',
+
+						'a.is_confirmed',
+						'a.confirmed_at as confirmation_date',
+						'a.for_reminder as reminded',
+						'a.is_reconfirmed as reminder_status'
+					)->get();
+
+
+		return grid_json(
+			$rows, 
+			null,
+			null
+		);
+	}
+
 
 	public static function top_cleaners()
 	{

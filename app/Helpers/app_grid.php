@@ -43,7 +43,7 @@ function grid_json($rows = array(), $columns = array(), $editable_rows = array()
 
 
 				// For editable columns
-				if (in_array($head, $editable_rows)) {
+				if ($editable_rows and in_array($head, $editable_rows)) {
 					$data['editable'][] = $_editable[$head];
 				}
 

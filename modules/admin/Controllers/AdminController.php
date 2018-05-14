@@ -50,12 +50,12 @@ class AdminController extends Controller
 		// Top Cleaners and review preview
 		// Bookings per day Graph
 		return view(MODULE . '::components.dashboard', array(
-			'booking_stats' => GraphModel::dashboard_booking_stats(),
+			'booking_stats' 	=> GraphModel::dashboard_booking_stats(),
 
 			'top_cleaner' 		=> json_encode(AdminModel::top_cleaners()),
 			'top_cleaner_title' => date('M Y') . ' Top Cleaners',
 
-			'top_clients' 	=> json_encode(AdminModel::top_clients())
+			'booking_summary' 	=> json_encode(AdminModel::booking_summary())
 		));
 	}
 

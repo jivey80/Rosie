@@ -13,7 +13,7 @@
 			</div>
 		</div>
 
-		<div id="booking_summary" data-response="{{ $top_clients }}"></div>
+		<div id="booking_summary" data-response="{{ $booking_summary }}"></div>
 	</div>
 
 	<div class="col-md-4 col-fix">
