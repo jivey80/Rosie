@@ -123,19 +123,7 @@ class AdminModel
 				    DB::raw("(c.confirmed + c.pending) as total_bookings")
 				)->get();
 
-		return grid_json(
-			$rows, 
-			null,
-			array(
-				'client_id',
-				'client_name',
-				'email',
-
-				'confirmed',
-				'pending',
-				'total_bookings'
-			)
-		);
+		return grid_json($rows, null, null);
 	}
 
 	public static function booking_summary()
@@ -162,11 +150,7 @@ class AdminModel
 					)->get();
 
 
-		return grid_json(
-			$rows, 
-			null,
-			null
-		);
+		return grid_json($rows, null, null);
 	}
 
 
