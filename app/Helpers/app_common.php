@@ -118,14 +118,18 @@ if (! function_exists('timetable_autocorrect')) {
                 $time_str = strtotime($slot->start);
                 $time_end = strtotime($slot->end);
 
-                if ($time_now >= $time_str or $time_now >= $time_end) {
+                if ($slot->is_today) {
 
-                    unset($timetable[$slot_id]);
-                
-                } else if (in_between($time_now, $time_str, $time_end)) {
+                    if (
+                        ($time_now >= $time_str) or 
+                        ($time_now >= $time_end) or 
+                        in_between($time_now, $time_str, $time_end)
+                    ) {
 
-                    unset($timetable[$slot_id]);
-                }
+                        unset($timetable[$slot_id]);                
+
+                    }
+                }            
             }
         }
 

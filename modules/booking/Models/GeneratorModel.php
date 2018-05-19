@@ -180,6 +180,7 @@ class GeneratorModel
 						'hours' 		=> $slot['hours'],
 
 						'is_booked' 	=> $slot['is_booked'],
+						'is_today' 		=> $slot['is_today'],
 
 						'travel'		=> $slot['travel']
 					);
@@ -233,11 +234,44 @@ class GeneratorModel
 							'b.avatar',
 							'a.date_available',
 							'a.time_in',
-							'a.time_out'
+							'a.time_out',
+
+							DB::raw("(CASE WHEN a.date_available = DATE(NOW()) THEN 1 ELSE 0 END) as is_today")
 						)->get();
 
-			return self::set_avatar_url($records);
+			$filter_time 	= self::filter_timeinout($records);
+
+			$filter_avatar 	= self::set_avatar_url($filter_time);
+
+			return $filter_avatar;
 		}
+	}
+
+	/**
+	 * Checks if the time of the timetable has already been passed.
+	 * 
+	 * @param  array  $records Timetable
+	 * @return array  Filtered timetable records
+	 */
+	private static function filter_timeinout($records = array())
+	{
+		if ($records) {
+
+			foreach ($records as $i => $record) {
+				
+				if ($record->is_today) {
+
+					$time_out = strtotime($record->time_out);
+					$time_now = strtotime(date('H:i:s'));
+					
+					if ($time_now > $time_out) {
+						unset($records[$i]);
+					}
+				}
+			}
+		}
+
+		return $records;
 	}
 
 	private static function set_avatar_url($records = array())
@@ -469,6 +503,7 @@ class GeneratorModel
 					'avatar' 			=> $timetable->avatar,
 
 					'is_booked' 		=> $is_booked,
+					'is_today' 			=> $timetable->is_today,
 
 					'travel'			=> $padding
 				);

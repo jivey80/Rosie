@@ -107,7 +107,8 @@
                 '{{PROJECT_NAME}}',
                 '{{PROJECT_VERSION}}'
             ];
-            console.log('%c'+__PRJ_INFO.join(' | '), 'padding: 0 14px; border-left: 7px solid #53082a; border-right: 7px solid #53082a; background: #d11569; color: #fff;');
+            var __TIMESTAMP = ' [{{ date("ymd.hisA") }}]';
+            console.log('%c' + __PRJ_INFO.join(' | ') + __TIMESTAMP, 'padding: 0 14px; border-left: 7px solid #53082a; border-right: 7px solid #53082a; background: #d11569; color: #fff;');
         </script>
         
         @if(ENVIRONMENT === 'local' and FORCE_MIN_ASSETS === false)
