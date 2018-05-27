@@ -39,6 +39,7 @@ class GeneratorController extends Controller
 				// Remove slots that has already passed the 
 				// current time.
 				$slots = timetable_autocorrect(GeneratorModel::list_schedule($timetable_id, $slotlist));
+				// io(GeneratorModel::list_schedule($timetable_id, $slotlist));
 
 
 				// Get the duration of the timetable as base

@@ -201,8 +201,6 @@ if (typeof jQuery === 'undefined') {
 
                     html.push('<li>');
 
-                        console.log(data[ctr]);
-
                         if (typeof data[ctr] != 'undefined') {
                             
                             html.push('<span class="rosie-list-' + ctr + '">');
@@ -305,7 +303,7 @@ if (typeof jQuery === 'undefined') {
     };
 
 
-	window.notify = function (title, message, callback) {
+	window.notify = function (title, message, callback, show_footer_button) {
 
         var popup = $('#notif_modal');
 
@@ -313,20 +311,32 @@ if (typeof jQuery === 'undefined') {
 
         	title = (typeof title == 'undefined') ? 'Title' : title;
         	message = (typeof message == 'undefined') ? 'Body' : message;
+            show_footer_button = (typeof show_footer_button == 'undefined') ? true : show_footer_button;
 
 
+            // Create modal
             popup.find('.modal-title').html(title);
 
-            popup.find('.modal-body').html(message);
+            popup.find('.modal-body').html(message).promise().done(function () {
 
+                // Custom callback
+                if (typeof callback == 'function') {
+                    callback(popup);
+                }
+            });
+
+            if (! show_footer_button) {
+
+                $('#modal_ok').hide();
+
+            }
+
+            // Activate modal
             popup.modal();
 
-
-            popup.on('hide.bs.modal', function () {
-
-                if (typeof callback == 'function') {
-                    callback();
-                }
+            popup.on('hidden.bs.modal', function () {
+                $('#modal_ok').show();
+                $(this).data('bs.modal', null);
             });
         }
     };
@@ -348,8 +358,10 @@ if (typeof jQuery === 'undefined') {
 
 			if (response.message === 'Unauthorized') {
 
-				notify('Error', 'Session Timeout. Please relogin', function () {
-	                window.location.href = window.location.href;
+				notify('Error', 'Session Timeout. Please relogin', function (modal) {
+                    modal.on('hide.bs.modal', function () {
+                        window.location.href = window.location.href;
+                    });
 	            });
 
 	            throw Error(response.message);

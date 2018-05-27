@@ -512,7 +512,7 @@ if (typeof jQuery === 'undefined') {
 
 											return [
 												'<div class="text-center">',
-													'<a class="stripe-send-link btn btn-xs btn-raised btn-warning" data-fname="' + row[1] + '" data-email="' + row[3] + '">' + data + '</a>',
+													'<a id="stripe_send_link_'+ row[1] +'" class="stripe-send-link btn btn-xs btn-raised btn-warning" data-fname="' + row[1] + '" data-email="' + row[3] + '">' + data + '</a>',
 												'</div>'
 											].join('');
 										}

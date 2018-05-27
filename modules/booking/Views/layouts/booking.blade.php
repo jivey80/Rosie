@@ -47,48 +47,46 @@
         <![endif]-->
 
 
-        <div>
-            <div class="booking-panel">
-                <div class="booking-header">
-                    <h2>Setup a Booking Schedule</h2>
-                </div>
+        <div class="booking-panel">
+            <div class="booking-header">
+                <h2>Setup a Booking Schedule</h2>
+            </div>
 
-                <div class="booking-process" id="booking_process">
-                    
-                    <div class="booking-steps" id="booking_details" data-stepurl="{{ MODULE }}/details">
-                        <i class="material-icons">assignment</i> <span>Details</span>
-                    </div>
-                    
-                    <div class="booking-steps booking-disabled" id="booking_schedule" data-stepurl="{{ MODULE }}/schedule">
-                        <i class="material-icons">schedule</i> <span>Choose Day</span>
-                    </div>
-                    
-                    <div class="booking-steps booking-disabled" id="booking_confirmation" data-stepurl="{{ MODULE }}/confirmation">
-                        <i class="material-icons">priority_high</i> <span>Confirm</span>
-                    </div>
-
-                    <div class="clearfix"></div>
+            <div class="booking-process" id="booking_process">
+                
+                <div class="booking-steps" id="booking_details" data-stepurl="{{ MODULE }}/details">
+                    <i class="material-icons">assignment</i> <span>Details</span>
                 </div>
                 
+                <div class="booking-steps booking-disabled" id="booking_schedule" data-stepurl="{{ MODULE }}/schedule">
+                    <i class="material-icons">schedule</i> <span>Choose Day</span>
+                </div>
+                
+                <div class="booking-steps booking-disabled" id="booking_confirmation" data-stepurl="{{ MODULE }}/confirmation">
+                    <i class="material-icons">priority_high</i> <span>Confirm</span>
+                </div>
 
-                <div class="booking-form">
-                    <div id="error_notif" class="alert alert-dismissible alert-danger" style="display: none;">
-                        
-                        <strong>Ooops!</strong>
+                <div class="clearfix"></div>
+            </div>
+            
 
-                        <span id="error_message"></span>
-                    </div>
+            <div class="booking-form">
+                <div id="error_notif" class="alert alert-dismissible alert-danger" style="display: none;">
+                    
+                    <strong>Ooops!</strong>
 
-                    <div id="success_notif" class="alert alert-dismissible alert-success" style="display: none;">
-                        
-                        <strong>Success!</strong>
+                    <span id="error_message"></span>
+                </div>
 
-                        <span id="success_message"></span>
-                    </div>
+                <div id="success_notif" class="alert alert-dismissible alert-success" style="display: none;">
+                    
+                    <strong>Success!</strong>
 
-                    <div id="booking_form">
-                        @yield('content')
-                    </div>
+                    <span id="success_message"></span>
+                </div>
+
+                <div id="booking_form">
+                    @yield('content')
                 </div>
             </div>
         </div>

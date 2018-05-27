@@ -41,12 +41,26 @@ class BookingController extends Controller
 
 		// Generate list of schedule based
 		// from the selected interval (hours)
-		$timetable = GeneratorModel::get_active_timetable();
-		$slotlist = GeneratorModel::generate_schedule($timetable, $interval);
-		$schedule = BookingModel::get_schedule($timetable, $slotlist);
+		$timetable 	= GeneratorModel::get_active_timetable();
+		$slotlist 	= GeneratorModel::generate_schedule($timetable, $interval);
+		$schedules 	= BookingModel::get_schedule($timetable, $slotlist);
+
+
+		if ($schedules) {
+
+			$x = array();
+			foreach ($schedules as $i => $schedule) {
+
+				$timetable_id = $schedule['timetable_id'];
+				
+				$slots = timetable_autocorrect(GeneratorModel::list_schedule($timetable_id, $slotlist));
+
+				$schedules[$i]['available'] = count($slots);
+			}
+		}
 
 		return view(MODULE . '::booking.schedule', array(
-			'schedules' => $schedule
+			'schedules' => $schedules
 		));
 	}
 

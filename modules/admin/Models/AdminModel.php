@@ -149,7 +149,6 @@ class AdminModel
 						'a.is_reconfirmed as reminder_status'
 					)->get();
 
-
 		return grid_json($rows, null, null);
 	}
 

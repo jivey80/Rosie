@@ -14,6 +14,8 @@ class Template
 
 			'reset_password' 	=> 'reset_password.blade.php',
 			'new_account' 		=> 'new_account.blade.php',
+
+			'send_subs' 		=> 'stripe_subs.blade.php',
 		);
 
 		if (isset($types[$type])) {

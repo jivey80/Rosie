@@ -120,6 +120,15 @@ if (! function_exists('timetable_autocorrect')) {
 
                 if ($slot->is_today) {
 
+                    // dd(
+                    //     $time_now, 
+                    //     $time_str, 
+                    //     $time_end, 
+                    //     ($time_now >= $time_str), 
+                    //     ($time_now >= $time_end), 
+                    //     in_between($time_now, $time_str, $time_end)
+                    // );
+
                     if (
                         ($time_now >= $time_str) or 
                         ($time_now >= $time_end) or 

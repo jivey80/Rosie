@@ -73,4 +73,13 @@ class TemplateController extends Controller
 			'password' 	=> 'xxxx'
 		));
 	}
+
+	public function stripe_subs()
+	{
+		return view('mailer.stripe_subs', array(
+			'logo' 		=> ASSET_LOGO,
+			'username' => 'Vainglory07',
+			'link' 	=> 'http://www.google.com'
+		));
+	}
 }

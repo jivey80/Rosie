@@ -237,22 +237,81 @@ class CrudController extends Controller
 		return $data;
 	}
 
-	public function get_subs_link()
+	public function get_subs_link($fname = '', $email = '')
+	{
+		$as_callback = ($fname and $email) ? true : false;
+
+		$_fname = Input::has('fname') ? Input::get('fname') : $fname;
+		$_email = Input::has('email') ? Input::get('email') : $email;
+
+
+		if ($_fname and $_email) {
+
+			$baseurl = str_replace('/admin', '/booking/stripe', MODULE_BASE_URL);
+			$payload = Aes::payload(array(
+				'fname' => $_fname,
+				'email' => $_email,
+				'ftype' => 'subscription'
+			));
+
+			return array(
+				'status' => true,
+				'pload' => "{$baseurl}?payload={$payload}",
+				'fname' => $_fname,
+				'email' => $_email
+			);
+
+		} else {
+
+			if ($as_callback) {
+
+				return false;
+			
+			} else {
+
+				return Msg::error('Fail to generate subscription link.');
+			}
+		}
+	}
+
+	public function snd_subs_link()
 	{
 		if (Input::has(array('fname', 'email'))) {
 
 			$fname = Input::get('fname');
 			$email = Input::get('email');
 
-			$baseurl = str_replace('/admin', '/booking/stripe', MODULE_BASE_URL);
-			$payload = Aes::payload(array(
-				'fname' => $fname,
-				'email' => $email,
-				'ftype' => 'subscription'
-			));
+			$url_data = $this->get_subs_link($fname, $email);
 
-			return Msg::success(" Later on, this link should be sent automatically to the client as an email with 12 hour link validity. <a href=\"{$baseurl}?payload={$payload}\" target=\"_blank\">CLICK TO SEE SAMPLE SUBSCRIPTION LINK.</a>");
+			if ($url_data) {
+
+				$payload 	= $url_data['pload'];
+				$name 		= $url_data['fname'];
+
+
+				$template = Template::generate('send_subs', array(
+					'logo' 		=> ASSET_LOGO,
+					'username' 	=> $name,
+					'link' 		=> $payload
+				));
+
+				if (ENVIRONMENT === 'production') {
+
+					$bcc = defined('EMAIL_CONFIRM_BCC') ? EMAIL_CONFIRM_BCC : null;
+
+					emailer($email, 'Rosie Services Payment Subscription', $template, $bcc);
+
+				} else {
+
+					log_write('email_conf', $template);
+				}
+
+				return Msg::success("Subscription link has been sent to <b>{$name}</b>");
+			}
 		}
+
+
+		return Msg::error('Failed to send subscription link.');
 	}
 
 	private static function __filter_timetables($data)
@@ -269,8 +328,7 @@ class CrudController extends Controller
 				$data['employee_id'] = $fullname;
 
 				if (! CrudModel::verify_cleaner($fullname)) {
-
-					trigger_error('Selected cleaner is invalid.');
+					return Msg::error('Selected cleaner is invalid.');
 				}
 			}
 
@@ -287,7 +345,7 @@ class CrudController extends Controller
 				
 				} else {
 
-					trigger_error('Selected date is invalid.');
+					return Msg::error('Selected date is invalid.');
 				}
 
 			}
@@ -305,7 +363,7 @@ class CrudController extends Controller
 				
 				} else {
 
-					trigger_error('Selected time are invalid.');
+					return Msg::error('Selected time are invalid.');
 				}
 			}
 		}

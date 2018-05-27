@@ -333,7 +333,7 @@ if (typeof jQuery === 'undefined') {
 							
 							} else {
 
-								$('#schedule_5').prop('disabled', true).text('FULLY BOOKED');
+								$('#schedule_' + _did).prop('disabled', true).text('Fully Booked');
 							}
 						});
 

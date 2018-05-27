@@ -119,7 +119,48 @@ if (typeof jQuery === 'undefined') {
 			ajax_call('get_subscription_link', data, function (response) {
 
 				if (response.hasOwnProperty('status')) {
-					notify(response.status, response.message);
+					notify(
+						'Subscribe to Stripe',
+						[
+							'<p>',
+								'<b>' + response.fname + '</b> has not yet been subscribed to Stripe.',
+							'</p>',
+
+							'<a href="' + response.pload + '" target="_blank" id="subs_manual" class="btn btn-sm btn-raised btn-info">MANUAL SIGN UP</a>',
+							'<button id="subs_email" class="btn btn-sm btn-raised btn-info">SEND LINK</button>'
+						].join(''),
+						function (popup) {
+
+							$('#subs_manual').on('click', function (e) {
+								$(this).addClass('disabled');
+								popup.modal('hide');
+							});
+
+
+							$('#subs_email').on('click', function (e) {
+
+								$(this).addClass('disabled');
+								popup.modal('hide');
+
+								ajax_call('send_subscription_link', data, function (response) {
+									
+									var alert_class = response.status === 'Error' ? 'alert-danger' : 'alert-success';
+
+									$('#main_content').prepend([
+										'<div class="alert ' + alert_class + ' temp-alert" role="alert">',
+					                        '<span>' + response.message + '</span>',
+					                    '</div>'
+									].join('')).promise().done(function () {
+										var timer = setTimeout(function () {
+											$('.temp-alert').slideUp(700);
+											clearTimeout(timer);
+										}, 2500);
+									});
+								});
+							});
+						},
+						false
+					);
 				}
 			});
 		});

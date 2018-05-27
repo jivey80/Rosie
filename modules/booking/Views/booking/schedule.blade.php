@@ -36,9 +36,16 @@
 										<h4><b>Sold Out!</b></h4>
 									@else
 										<h4><b>${{ $schedule['cheapest'] }}/hour</b></h4>
-										<button type="button" class="btn btn-raised btn-info btn-rosie btn-xs booking-details" id="schedule_{{ $schedule['timetable_id'] }}" data-toggle="0">
-											Details <i class="material-icons">arrow_downward</i>
-										</button>
+
+										@if($schedule['available'])
+											<button type="button" class="btn btn-raised btn-info btn-rosie btn-xs booking-details" id="schedule_{{ $schedule['timetable_id'] }}" data-toggle="0">
+												Details <i class="material-icons">arrow_downward</i>
+											</button>
+										@else
+											<button type="button" class="btn btn-raised btn-info btn-rosie btn-xs booking-details" disabled="disabled">
+												Fully Booked
+											</button>
+										@endif
 									@endif
 
 								</div>

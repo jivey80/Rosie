@@ -36,10 +36,11 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Templates
-    Route::get('/template/confirmation',    'TemplateController@confirmation');
-    Route::get('/template/reminder',        'TemplateController@reminder');
-    Route::get('/template/review',          'TemplateController@review');
-    Route::get('/template/reset_password',  'TemplateController@reset_password');
-    Route::get('/template/new_account',     'TemplateController@new_account');
+    Route::get('/template/confirmation',        'TemplateController@confirmation');
+    Route::get('/template/reminder',            'TemplateController@reminder');
+    Route::get('/template/review',              'TemplateController@review');
+    Route::get('/template/reset_password',      'TemplateController@reset_password');
+    Route::get('/template/new_account',         'TemplateController@new_account');
+    Route::get('/template/stripe_subscribe',    'TemplateController@stripe_subs');
 });
 

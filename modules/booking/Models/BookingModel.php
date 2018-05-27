@@ -24,6 +24,7 @@ class BookingModel
 
 			// Groups slots by timetable
 			$groups = array();
+
 			foreach ($slots as $slot) {
 				$tid = $slot['timetable_id'];
 				$groups[$tid][] = $slot;
