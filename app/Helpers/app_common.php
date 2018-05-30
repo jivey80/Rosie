@@ -130,8 +130,8 @@ if (! function_exists('timetable_autocorrect')) {
                     // );
 
                     if (
-                        ($time_now >= $time_str) or 
-                        ($time_now >= $time_end) or 
+                        ($time_now > $time_str) or 
+                        ($time_now > $time_end) or 
                         in_between($time_now, $time_str, $time_end)
                     ) {
 

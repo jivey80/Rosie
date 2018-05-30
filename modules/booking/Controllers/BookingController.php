@@ -52,8 +52,10 @@ class BookingController extends Controller
 			foreach ($schedules as $i => $schedule) {
 
 				$timetable_id = $schedule['timetable_id'];
+
+				$list_schedule = GeneratorModel::list_schedule($timetable_id, $slotlist);
 				
-				$slots = timetable_autocorrect(GeneratorModel::list_schedule($timetable_id, $slotlist));
+				$slots = timetable_autocorrect($list_schedule);
 
 				$schedules[$i]['available'] = count($slots);
 			}
