@@ -29,6 +29,8 @@
         @if(ENVIRONMENT === 'local' and FORCE_MIN_ASSETS === false)
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/materialicons.css" />
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/autocomplete/css/easy-autocomplete.min.css" />
+        <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/autocomplete/css/easy-autocomplete.themes.min.css" />
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/timepicker/css/bootstrap-timepicker.min.css" />
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/datepicker/css/bootstrap-datepicker.min.css" />
         <link rel="stylesheet" href="{{ baseurl() }}/assets/vendors/materialize/css/bootstrap-material-design.css" />
@@ -125,6 +127,7 @@
         @if(ENVIRONMENT === 'local' and FORCE_MIN_ASSETS === false)
         <script src="{{ baseurl() }}/assets/vendors/jquery/jquery-3.3.1.min.js"></script>
         <script src="{{ baseurl() }}/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{ baseurl() }}/assets/vendors/autocomplete/js/jquery.easy-autocomplete.min.js"></script>
         <script src="{{ baseurl() }}/assets/vendors/timepicker/js/bootstrap-timepicker.min.js"></script>
         <script src="{{ baseurl() }}/assets/vendors/datepicker/js/bootstrap-datepicker.min.js"></script>
         <script src="{{ baseurl() }}/assets/vendors/materialize/js/ripples.min.js"></script>

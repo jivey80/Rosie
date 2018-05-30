@@ -269,4 +269,9 @@ class AdminController extends Controller
 
 		return Msg::error($validator->errors()->first());
 	}
+
+	public function list_client_email()
+	{
+		return ExpressBookModel::list_client_email();
+	}
 }

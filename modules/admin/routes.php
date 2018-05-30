@@ -24,6 +24,10 @@ Route::group(array(
 		Route::post('/change_password', 'AdminController@change_password');
 
 
+		// Autocomplete
+		Route::post('/get_client_email', 	'AdminController@list_client_email');
+
+
 		// CRUD REST
 		Route::post('/{module}/add', 		'CrudController@gateway');
 		Route::put('/{module}/edit', 		'CrudController@gateway');

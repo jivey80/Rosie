@@ -197,4 +197,17 @@ class ExpressBookModel
 
 		return $summary ? typecast($summary, 'object') : false;
 	}
+
+	public static function list_client_email()
+	{
+		$rows = 	DB::table('client')
+					->where('is_active', 1)
+					->whereNotNull('stripe_id')
+					->select(
+						'client_id',
+						'email'
+					)->get();
+
+		return array_pluck($rows, 'email');
+	}
 }

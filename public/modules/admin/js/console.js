@@ -677,27 +677,60 @@ if (typeof jQuery === 'undefined') {
 		}
 
 
-		// Email of client the admin wish to
-		// book in behalf.
-		dom.email.on('keyup', function (e) {
+		// Email of client the admin wish to book in behalf.
+		ajax_call('get_client_email', {}, function (response) {
 
-			var get_email = $(this).val();
+			if (response.length) {
 
-			if (valid_email(get_email)) {
+				dom.email.easyAutocomplete({
+					data: response,
+					list: {
+						onSelectItemEvent: function () {
 
-				dom.date.html('<option value="undefined">Choose Available Date</option>');
+							var get_email = dom.email.val();
 
-				// Load data to Date Selection
-				var date_selection = [];
-				$.each(info, function (i, v) {
-					date_selection.push('<option value="' + i + '">' + i + '</option>');
+							if (valid_email(get_email)) {
+
+								dom.date.html('<option value="undefined">Choose Available Date</option>');
+
+								// Load data to Date Selection
+								var date_selection = [];
+								$.each(info, function (i, v) {
+									date_selection.push('<option value="' + i + '">' + i + '</option>');
+								});
+
+								dom.date.removeAttr('disabled').append(date_selection.join(''));
+
+								__mfn_select_date(info);
+							}
+						}
+					}
 				});
+			
+			} else {
 
-				dom.date.removeAttr('disabled').append(date_selection.join(''));
-
-				__mfn_select_date(info);
+				dom.email.val('Client not found').prop('disabled', 'disabled');
 			}
-		});		
+		});
+		// dom.email.on('keyup', function (e) {
+
+		// 	var get_email = $(this).val();
+
+		// 	if (valid_email(get_email)) {
+
+		// 		dom.date.html('<option value="undefined">Choose Available Date</option>');
+
+		// 		// Load data to Date Selection
+		// 		var date_selection = [];
+		// 		$.each(info, function (i, v) {
+		// 			date_selection.push('<option value="' + i + '">' + i + '</option>');
+		// 		});
+
+		// 		dom.date.removeAttr('disabled').append(date_selection.join(''));
+
+		// 		__mfn_select_date(info);
+		// 	}
+		// });
 
 
 		function __mfn_select_date(info) 
