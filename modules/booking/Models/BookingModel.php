@@ -155,8 +155,6 @@ class BookingModel
 
 				if ($check) {
 
-					date_default_timezone_set('Asia/Manila');
-
 					DB::table('booking')
 					->where('booking_id', '=', $booking_id)
 					->where('client_id', '=', $client_id)
@@ -173,5 +171,31 @@ class BookingModel
 
 			return false;
 		}
+	}
+
+	public static function reconfirm_booking($booking_id = 0)
+	{
+		$check = 	DB::table('booking')
+					->where('booking_id', '=', $booking_id)
+					->where('is_confirmed', '=', 1)
+					->where('for_reminder', '=', 1)
+					->where('is_reconfirmed', '=', 0)
+					->first();
+
+		if ($check) {
+
+			// @temp 
+			// needs reconfirmation timestamp on database
+			DB::table('booking')
+			->where('booking_id', $booking_id)
+			->update(array(
+				'is_reconfirmed' => 1,
+				'confirmed_at' => date(TIMESTAMP_FORMAT)
+			));
+
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -22,6 +22,10 @@
                 <br />
 
                 <br />
+                <p style="padding: 0; margin: 0;">Additionally, our system sends out 24-hour email reminders for appointments.</p>
+                <br />
+
+                <br />
                 <p style="padding: 0; margin: 0;">Rosie Services Support</p>
                 <br />
 

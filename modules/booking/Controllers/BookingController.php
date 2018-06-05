@@ -85,58 +85,120 @@ class BookingController extends Controller
 			$payload = typecast(Input::get('pl'), 'string');
 			$payload_decrypt = Aes::decrypt(htmlspecialchars($payload));
 			$payload_data = json_decode($payload_decrypt);
+			
+			$is_valid_link = self::check_link_validity($payload_data, 60 * 60 * 24);
+
+			
+			if ($is_valid_link) {
+
+				$booking_id = $payload_data->b_id;
+				$client_id = $payload_data->c_id;
+				$schedule_id = $payload_data->s_id;
 
 
-			if (isset($payload_data->ts)) {
+				// Save booking status
+				$save = BookingModel::confirm_booking($booking_id, $client_id, $schedule_id);
 
-				$ts_now = strtotime(date(TIMESTAMP_FORMAT));
-				$ts_payload = $payload_data->ts;
-				$ts_offset = $ts_now - $ts_payload;
+				if ($save) {
 
+					// Success message
+					$message = Msg::success('<b>Congratulations!</b> The booking for this slot has been successfully verified.', array(
+						'link' => MODULE_BASE_URL
+					));
+					
+					// Fetch the booking data for display
+					$slot = self::slot_summary($payload_data);
+					$response = array_merge($message, $slot);
 
-				$expiry = 60 * 60 * 24;
-				
-				if ($ts_offset <= $expiry) {
+					return view(MODULE . '::booking.verified', $response);
 
-					$booking_id = $payload_data->b_id;
-					$client_id = $payload_data->c_id;
-					$schedule_id = $payload_data->s_id;
-
-
-					// Save booking status
-					$save = BookingModel::confirm_booking($booking_id, $client_id, $schedule_id);
-
-					if ($save) {
-
-						// Success message
-						$message = Msg::success('<b>Congratulations!</b> The booking for this slot has been successfully verified.', array(
-							'link' => MODULE_BASE_URL
-						));
-						
-						// Fetch the booking data for display
-						$slot = self::slot_summary($payload_data);
-						$response = array_merge($message, $slot);
-
-						return view(MODULE . '::booking.verified', $response);
-
-					} else {
-
-						return view(MODULE . '::booking.verified', array(
-							'status' => 'error',
-							'message' => 'The slot has already been confirmed for booking.',
-							'link' => MODULE_BASE_URL
-						));
-					}
-				
 				} else {
 
 					return view(MODULE . '::booking.verified', array(
 						'status' => 'error',
-						'message' => 'Sorry. The URL has already been expired.',
+						'message' => 'The slot has already been confirmed for booking.',
 						'link' => MODULE_BASE_URL
 					));
 				}
+			
+			} else {
+
+				return view(MODULE . '::booking.verified', array(
+					'status' => 'error',
+					'message' => 'Sorry. The URL has already been expired.',
+					'link' => MODULE_BASE_URL
+				));
+			}
+		}
+
+		return view(MODULE . '::booking.verified', array(
+			'status' => 'error',
+			'message' => 'Sorry, this is an invalid URL. <br /> Please contact our customer support for further assistance.',
+			'link' => MODULE_BASE_URL
+		));
+	}
+
+	private static function check_link_validity($payload_data = array(), $expiry = 0)
+	{	
+		// @temp should be converted to Aes::payload() for consistency
+		// ts (timestamp) property is expected.
+		if ($payload_data and isset($payload_data->ts)) {
+
+			$ts_now = strtotime(date(TIMESTAMP_FORMAT));
+			$ts_payload = $payload_data->ts;
+			$ts_offset = $ts_now - $ts_payload;
+
+			return ($ts_offset <= $expiry or $expiry === 0) ? true : false;
+		}
+
+		return false;
+	}
+
+	public static function reminder()
+	{
+		if (Input::has('pl')) {
+
+			$payload = Input::get('pl');
+			$decrypt = Aes::verify_payload($payload, 60 * 60 * 24);
+
+			if ($decrypt) {
+
+				$decrypt_data = json_decode($decrypt);
+				$payload_data = json_decode($decrypt_data->dt);
 				
+
+				// Save booking status
+				$save = BookingModel::reconfirm_booking($payload_data->b_id);
+
+				if ($save) {
+
+					// Success message
+					$message = Msg::success('<b>See you!</b> This is to confirm that you had been reminded by this booking.', array(
+						'link' => MODULE_BASE_URL
+					));
+
+					// Fetch the booking data for display
+					$slot = self::slot_summary($payload_data);
+					$response = array_merge($message, $slot);
+
+					return view(MODULE . '::booking.verified', $response);
+
+				} else {
+
+					return view(MODULE . '::booking.verified', array(
+						'status' => 'error',
+						'message' => 'The slot has already been confirmed for booking.',
+						'link' => MODULE_BASE_URL
+					));
+				}
+			
+			} else {
+
+				return view(MODULE . '::booking.verified', array(
+					'status' => 'error',
+					'message' => 'Sorry. The URL has already been expired.',
+					'link' => MODULE_BASE_URL
+				));
 			}
 		}
 

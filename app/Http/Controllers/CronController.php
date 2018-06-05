@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Modules\Booking\Controllers\Controller as BookingMainController;
 use App\Http\Models\CronModel;
-use Template;
+use Template, Aes;
 
 
 class CronController extends Controller
@@ -112,20 +112,26 @@ class CronController extends Controller
 
 				// Filter bookings that has the acceptable
 				// interval between the booking date and confirmation date.
-				if ($slot->countdown > $effectivity) {
+				if ($slot->countdown > $effectivity or TRUE) {
 
 					$day_offset = get_date_offset($slot->date_now, $slot->date_start);
 
 					// Send the email only one day before the booking date.
-					if ($day_offset === 1) {
+					if ($day_offset === 1 or TRUE) {
 
 						$payload = typecast(array(
-							's_id' => "t{$slot->timetable_id}_o0_na",
+							's_id' => "t{$slot->timetable_id}_o0_{$slot->duration}",
 							'b_id' => $slot->booking_id,
 							'prc' => typecast($slot->price, 'float')
 						), 'object');
 
 						$summary = BookingMainController::slot_summary($payload);
+
+
+						$base_url = MODULE_BASE_URL;
+						$new_payload = Aes::payload(json_encode($payload));
+						$payload_url = "{$base_url}/remind?pl={$new_payload}";
+
 
 						$template = Template::generate('reminder', array(
 							'logo' 		=> ASSET_LOGO,
@@ -139,8 +145,9 @@ class CronController extends Controller
 							'avatar' 	=> $summary['avatar'],
 							'rating' 	=> $summary['rate'],
 
-							'link' 		=> 'https://www.google.com'
+							'link' 		=> $payload_url
 						));
+
 
 						// Send email reminder
 						if (ENVIRONMENT === 'production') {

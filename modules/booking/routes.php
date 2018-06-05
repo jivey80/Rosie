@@ -12,6 +12,7 @@ Route::group(array(
 		Route::post('/schedule', 		'BookingController@schedule_page');
 		Route::post('/confirmation', 	'BookingController@confirmation_page');
 		Route::get('/confirm', 			'BookingController@confirmation');
+		Route::get('/remind', 			'BookingController@reminder');
 		Route::get('/review', 			'BookingController@review_page');
 
 		// Stripe Integration

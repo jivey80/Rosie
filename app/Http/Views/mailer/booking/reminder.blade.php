@@ -51,7 +51,7 @@
             <td style="padding: 30px 10px 10px 10px;" colspan="2">
                 <br />
                 <div style="width: 100%; text-align: center;">
-                    <a href="{{$link}}" target="_blank" style="padding: 10px; margin: 0 auto; border-radius: 5px; border: 3px solid #e96656; color: #e96656; text-decoration: none; text-transform: uppercase;">Confirm Booking</a>
+                    <a href="{{$link}}" target="_blank" style="padding: 10px; margin: 0 auto; border-radius: 5px; border: 3px solid #e96656; color: #e96656; text-decoration: none; text-transform: uppercase;">Confirm Booking Reminder</a>
                 </div>
             </td>
         </tr>
