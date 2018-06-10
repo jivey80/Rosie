@@ -143,10 +143,11 @@ class AdminModel
 						'a.schedule_start as start',
 						'a.schedule_end as end',
 
-						'a.is_confirmed',
-						'a.confirmed_at as confirmation_date',
-						'a.for_reminder as reminded',
-						'a.is_reconfirmed as reminder_status'
+						DB::raw("(CASE WHEN a.is_confirmed = 1 THEN 'YES' ELSE 'NO' END) as confirmed"),
+						DB::raw("(CASE WHEN a.for_reminder = 0 THEN 'SENT' ELSE 'PENDING' END) as email_reminder"),
+						DB::raw("(CASE WHEN a.is_reconfirmed = 1 THEN 'YES' ELSE 'WAITING' END) as reminded"),
+
+						'a.confirmed_at as last_update'
 					)->get();
 
 		return grid_json($rows, null, null);
